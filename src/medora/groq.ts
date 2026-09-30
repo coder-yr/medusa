@@ -7,8 +7,8 @@ export const MODELS = {
 export type Msg = { role: "system" | "user" | "assistant"; content: string | unknown[] };
 
 export const getKey = (): string => {
-  const k = (import.meta.env.VITE_GROQ_API_KEY as string | undefined) || localStorage.getItem("medora.groqKey") || "";
-  return k.trim();
+  let k = (import.meta.env.VITE_GROQ_API_KEY as string | undefined) || localStorage.getItem("medora.groqKey") || "";
+  return k.replace(/[^\x20-\x7E]/g, '').trim();
 };
 export const setKey = (k: string) => (k ? localStorage.setItem("medora.groqKey", k.trim()) : localStorage.removeItem("medora.groqKey"));
 
